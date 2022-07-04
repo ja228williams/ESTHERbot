@@ -1,3 +1,4 @@
+import os
 import sys
 import time
 from selenium import webdriver
@@ -12,9 +13,9 @@ import requests
 from register_classes import register_classes
 
 ############################################################
-my_netid = ""
-my_username = ""
-my_password = ""
+my_netid = os.environ.get("netid")
+my_username = os.environ.get("username")
+my_password = os.environ.get("esther_password")
 crn_list = ["10668", "14256"]
 
 
@@ -31,7 +32,7 @@ if __name__ == "__main__":
     input_password = my_password
     input_netid = my_netid
     crn_list = crn_list
-    register_classes(input_username, input_password, input_netid, crn_list)
+    # register_classes(input_username, input_password, input_netid, crn_list)
 
 
 # potential bugs / issues:

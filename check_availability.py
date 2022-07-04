@@ -149,18 +149,15 @@ def send_update_email(username, password, netid, course_name, sender_email, emai
 
 
 # esther login info
-my_netid = ""
-my_username = ""
-my_password = ""
+my_netid = os.environ.get("netid")
+my_username = os.environ.get("username")
+my_password = os.environ.get("esther_password")
 course_name = "MUSI 117"
 
 # email info
-sender_email = ""
-email_password = ""
-receiver_email = ""
+sender_email = os.environ.get("sender_email")
+email_password = os.environ.get("email_password")
+receiver_email = os.environ.get("receiver_email")
 
 # check_availability(my_username, my_password, my_netid, course_name)
-# send_update_email(my_username, my_password, my_netid, course_name, sender_email, email_password, receiver_email)
-
-# to-do:
-# 1) setup scheduling email schedule
+send_update_email(my_username, my_password, my_netid, course_name, sender_email, email_password, receiver_email)

@@ -3,9 +3,6 @@ import ssl
 import traceback
 from email.message import EmailMessage
 
-# login credentials
-my_password = ""
-
 
 def send_email(sender_gmail, password, message, receiver, subject=None):
     port = 465

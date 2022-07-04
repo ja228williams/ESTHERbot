@@ -126,6 +126,7 @@ def register_classes(username, password, netid, crn_lst):
 
     # submit courses
     print("submitting courses...")
+    # ##### currently commented out to avoid screwing with actually signing up for classes
     # submit = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "saveButton")))
     # submit.click()
     print("process completed. terminating in 30 seconds.")
