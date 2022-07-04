@@ -26,6 +26,7 @@ def send_email(sender_gmail, password, message, receiver, subject=None):
 
             server.send_message(e_message)
             print("email sent successfully")
+
     except Exception as e:
         print("\nError sending email:")
         print(traceback.format_exc())
