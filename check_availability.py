@@ -15,6 +15,7 @@ from html_code_cleaner import code_to_course
 from send_email import send_email
 from email.message import EmailMessage
 
+
 def reformat_class_string(class_str):
     new_class_str = ""
 
@@ -117,8 +118,6 @@ def check_availability(username, password, netid, course_name):
         print('\n' + reformat_class_string(course))
     print()
 
-    # time.sleep(5)
-
     driver.quit()
 
     return available_courses
@@ -135,18 +134,19 @@ def send_update_email(username, password, netid, course_name, sender_email, emai
         send_email(sender_email, email_password, message, receiver_email, subject)
         quit(1)
 
-    subject = ""
     if len(available_courses) == 0:
         message = "No sections of " + course_name + " are currently available. "
         subject = message
     else:
-        message = str(len(available_courses)) + " section" + ('s' if len(available_courses) > 1 else '') + " of " + course_name + " are available. "
+        message = str(len(available_courses)) + " section" + (
+            's' if len(available_courses) > 1 else '') + " of " + course_name + " are available. "
         subject = message
         for course in available_courses:
-            message += 2*'\n' + reformat_class_string(course)
+            message += 2 * '\n' + reformat_class_string(course)
     print(message)
 
     send_email(sender_email, email_password, message, receiver_email, subject)
+
 
 # esther login info
 my_netid = ""
@@ -157,7 +157,6 @@ course_name = "MUSI 117"
 # email info
 sender_email = ""
 email_password = ""
-#!!!!!!!!!!!!!!!!!!!!! GET RID OF THIS PASSWORD BEFORE GITHUBBING
 receiver_email = ""
 
 # check_availability(my_username, my_password, my_netid, course_name)

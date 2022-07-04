@@ -12,8 +12,6 @@ import requests
 from register_classes import register_classes
 
 ############################################################
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# PERSONAL TEST VALUES- DO NOT PUBLISH UNTIL THESE ARE REMOVED
 my_netid = ""
 my_username = ""
 my_password = ""

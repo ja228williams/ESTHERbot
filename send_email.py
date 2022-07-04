@@ -2,7 +2,6 @@ import smtplib
 import ssl
 import traceback
 from email.message import EmailMessage
-import sys
 
 # login credentials
 my_password = ""
@@ -30,7 +29,3 @@ def send_email(sender_gmail, password, message, receiver, subject=None):
     except Exception as e:
         print("\nError sending email:")
         print(traceback.format_exc())
-
-
-# try sending to myself first? could get around credential issues, esp with rice email
-# print(send_email("jaw15developer@gmail.com", my_password, "peter", "jaw15@rice.edu"))
