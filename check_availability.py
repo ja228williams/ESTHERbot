@@ -1,19 +1,14 @@
 import os
-import sys
-import time
 import traceback
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import requests
-from html_code_cleaner import code_to_course
+from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
+
 from send_email import send_email
-from email.message import EmailMessage
 
 
 def reformat_class_string(class_str):
@@ -152,12 +147,11 @@ def send_update_email(username, password, netid, course_name, sender_email, emai
 my_netid = os.environ.get("netid")
 my_username = os.environ.get("username")
 my_password = os.environ.get("esther_password")
-course_name = "MUSI 117"
+my_course_name = os.environ.get("course_name")
 
 # email info
 sender_email = os.environ.get("sender_email")
 email_password = os.environ.get("email_password")
 receiver_email = os.environ.get("receiver_email")
 
-# check_availability(my_username, my_password, my_netid, course_name)
-send_update_email(my_username, my_password, my_netid, course_name, sender_email, email_password, receiver_email)
+send_update_email(my_username, my_password, my_netid, my_course_name, sender_email, email_password, receiver_email)
