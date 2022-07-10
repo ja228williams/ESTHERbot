@@ -125,9 +125,10 @@ def send_update_email(username, password, netid, course_name, sender_email, emai
         available_courses = check_availability(username, password, netid, course_name)
     except Exception as e:
         message = "Error accessing class information from ESTHER.\n\n" + str(traceback.format_exc())
+        print(message)
         subject = "Error accessing ESTHER"
         send_email(sender_email, email_password, message, receiver_email, subject)
-        quit(1)
+        quit(2)
 
     if len(available_courses) == 0:
         message = "No sections of " + course_name + " are currently available. "
@@ -145,7 +146,7 @@ def send_update_email(username, password, netid, course_name, sender_email, emai
 
 # esther login info
 my_netid = os.environ.get("netid")
-my_username = os.environ.get("username")
+my_username = os.environ.get("esther_username")
 my_password = os.environ.get("esther_password")
 my_course_name = os.environ.get("course_name")
 
