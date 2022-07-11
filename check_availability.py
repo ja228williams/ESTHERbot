@@ -145,14 +145,14 @@ def send_update_email(username, password, netid, course_name, sender_email, emai
 
 
 # esther login info
-my_netid = os.environ.get("netid")
-my_username = os.environ.get("esther_username")
-my_password = os.environ.get("esther_password")
-my_course_name = os.environ.get("course_name")
+netid = os.environ.get("netid")
+esther_username = os.environ.get("esther_username")
+esther_password = os.environ.get("esther_password")
+course_name = os.environ.get("course_name")
 
 # email info
 sender_email = os.environ.get("sender_email")
 email_password = os.environ.get("email_password")
 receiver_email = os.environ.get("receiver_email")
 
-send_update_email(my_username, my_password, my_netid, my_course_name, sender_email, email_password, receiver_email)
+send_update_email(esther_username, esther_password, netid, course_name, sender_email, email_password, receiver_email)
