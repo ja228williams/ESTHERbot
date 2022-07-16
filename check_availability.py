@@ -12,39 +12,59 @@ from send_email import send_email
 
 
 def reformat_class_string(class_str):
-    new_class_str = ""
+    """
+    Reformats the string for a given class into a cleaner form.
 
-    # organize class_str
+    :param class_str: The raw input class string
+
+    :return: A string consisting of the course's title, format, professor, time, type, and number of remaining seats.
+    """
+
+    # organizes class_str into components
     components = class_str.split('\n')
     title = components[0]
     prof_format_block = components[1]
+
+    # separates format from professor within line
     try:
         format = prof_format_block[:prof_format_block.index(' ')]
         prof = prof_format_block[prof_format_block.index(' ') + 1:]
         prof_format_block = format + "\n" + prof
     except ValueError:
         prof_format_block = prof_format_block + "\nNo currently assigned professor."
+
+    # isolates other relevant components
     time_type = components[9]
     time = time_type[:time_type.rindex(' Type:')]
     type = time_type[time_type.rindex('Type:'):]
     seats = components[-1]
 
-    new_class_str += title + '\n' + prof_format_block + '\n' + time + '\n' + type + '\n' + seats
+    new_class_str = title + '\n' + prof_format_block + '\n' + time + '\n' + type + '\n' + seats
 
     return new_class_str
 
 
-def check_availability(username, password, netid, course_name):
+def check_availability(username, password, course_name):
+    """
+    Checks ESTHER for availability of sections for a given course.
+
+    :param username: ESTHER username (student ID of form SXXXXXXXX)
+    :param password: ESTHER password
+    :param course_name: Name of the course in the form of the name of the department and course number (ex. MUSI 117)
+
+    :return: list of strings describing available course sections, including the course's name, type, professor, time,
+             and number of remaining seats.
+    """
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
     orig_url = "https://esther.rice.edu/selfserve/twbkwbis.P_WWWLogin"
     driver.get(orig_url)
 
-    # parse subject and course number
+    # parses subject and course number
     subject = course_name[0:4]
     course_number = course_name[-3:]
 
-    # login page
+    # accesses login page
     print("logging in...")
     user_box = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "UserID")))
     user_box.send_keys(username)
@@ -59,17 +79,17 @@ def check_availability(username, password, netid, course_name):
     banner = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "NewReg")))
     banner.click()
 
-    # Switch tabs to registration home page
+    # switches tabs to registration home page
     print("switching tabs...")
     second_window = driver.window_handles[1]
     driver.switch_to.window(second_window)
 
-    # navigate to "browse course schedule"
+    # navigates to "browse course schedule"
     print("navigating to 'browse course schedule'...")
     browse_schedule = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "classSearchLink")))
     browse_schedule.click()
 
-    # select newest (default) term
+    # selects newest (default) term
     print("selecting term...")
     term_selection = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "select2-chosen-1")))
     term_selection.click()
@@ -78,8 +98,8 @@ def check_availability(username, password, netid, course_name):
     term_cont = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "term-go")))
     term_cont.click()
 
+    # inputs subject
     print("inputting class information...")
-    # input subject
     subject_name_box = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "s2id_txt_subject")))
     subject_name_box.click()
 
@@ -89,15 +109,15 @@ def check_availability(username, password, netid, course_name):
     subject_name_selection = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, subject)))
     subject_name_selection.click()
 
-    # input course number
+    # inputs course number
     course_number_input = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "txt_courseNumber")))
     course_number_input.send_keys(course_number)
 
-    # search for crn
+    # searches for crn
     crn_search = WebDriverWait(driver, 30).until((EC.presence_of_element_located((By.ID, "search-go"))))
     crn_search.click()
 
-    # analyze course table
+    # analyzes course table
     courses = []
     available_courses = []
     course_table = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "table1")))
@@ -118,18 +138,32 @@ def check_availability(username, password, netid, course_name):
     return available_courses
 
 
-def send_update_email(username, password, netid, course_name, sender_email, email_password, receiver_email):
+def send_update_email(username, password, course_name, sender_email, email_password, receiver_email):
+    """
+    Sends an email update about available sections of a course. Prints the message sent to the receiving email or the
+    backtrace of an error if one occurs.
+
+    :param username: ESTHER username (student ID of form SXXXXXXXX)
+    :param password: ESTHER password
+    :param course_name: Name of the course in the form of the name of the department and course number (ex. MUSI 117)
+    :param sender_email: Name of the email account being used to send the update email.
+    :param email_password: Password for the email account being used to send the update email.
+    :param receiver_email: Name of the email account receiving the update email.
+    """
     available_courses = []
 
+    # finds available courses via check_availability function
     try:
-        available_courses = check_availability(username, password, netid, course_name)
-    except Exception as e:
+        available_courses = check_availability(username, password, course_name)
+    except:
+        # handles errors from check_availability funciton
         message = "Error accessing class information from ESTHER.\n\n" + str(traceback.format_exc())
         print(message)
         subject = "Error accessing ESTHER"
         send_email(sender_email, email_password, message, receiver_email, subject)
         quit(2)
 
+    # defines subject and message
     if len(available_courses) == 0:
         message = "No sections of " + course_name + " are currently available. "
         subject = message
@@ -144,8 +178,9 @@ def send_update_email(username, password, netid, course_name, sender_email, emai
     send_email(sender_email, email_password, message, receiver_email, subject)
 
 
+# environmental variables
+
 # esther login info
-netid = os.environ.get("netid")
 esther_username = os.environ.get("esther_username")
 esther_password = os.environ.get("esther_password")
 course_name = os.environ.get("course_name")
@@ -155,4 +190,4 @@ sender_email = os.environ.get("sender_email")
 email_password = os.environ.get("email_password")
 receiver_email = os.environ.get("receiver_email")
 
-send_update_email(esther_username, esther_password, netid, course_name, sender_email, email_password, receiver_email)
+send_update_email(esther_username, esther_password, course_name, sender_email, email_password, receiver_email)

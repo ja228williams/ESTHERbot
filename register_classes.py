@@ -1,22 +1,29 @@
-import sys
 import time
+
 from selenium import webdriver
-from selenium.common import ElementClickInterceptedException, NoSuchElementException
+from selenium.common import NoSuchElementException
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import requests
+from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 def register_classes(username, password, netid, crn_lst):
+    """
+    Registers user for a set of classes for the upcoming semester.
+
+    :param username: ESTHER username (student ID of form SXXXXXXXX)
+    :param password: ESTHER password
+    :param netid: student netID
+    :param crn_lst: list of CRNs corresponding to the courses being registered for
+    """
     # driver = webdriver.Chrome("C:/Users/2020c/Downloads/chromedriver_win32/chromedriver.exe")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     orig_url = "https://esther.rice.edu/selfserve/twbkwbis.P_WWWLogin"
     driver.get(orig_url)
 
-    # login page
+    # accesses login page
     print("logging in...")
     user_box = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "UserID")))
     user_box.send_keys(username)
@@ -26,17 +33,17 @@ def register_classes(username, password, netid, crn_lst):
         EC.presence_of_element_located((By.XPATH, "/html/body/div[@class='pagebodydiv']/form/p/input[1]")))
     login.click()
 
-    # ESTHER home page
+    # accesses ESTHER home page
     print("entering banner...")
     banner = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "NewReg")))
     banner.click()
 
-    # Switch tabs to registration home page
+    # switches tabs to registration home page
     print("switching tabs...")
     second_window = driver.window_handles[1]
     driver.switch_to.window(second_window)
 
-    # Registration home page
+    # accesses registration home page
     print("entering registration home page...")
     register_home_page = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "registerLink")))
     register_home_page.click()
@@ -79,10 +86,10 @@ def register_classes(username, password, netid, crn_lst):
     continue_button = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "term-go")))
     continue_button.click()
 
-    # close out notification if it exists
+    # closes out notification if it exists
     try:
         print("closing notification...")
-        # change which element is being located to a different element of the website that can be found
+        # changes which element is being located to a different element of the website that can be found
         notif_close = WebDriverWait(driver, 3).until(EC.presence_of_element_located(
             (By.XPATH, "/html[@class=' js no-flexbox flexbox-legacy flexboxlegacy canvas "
                        "canvastext webgl no-touch geolocation postmessage websqldatabase "
@@ -107,7 +114,7 @@ def register_classes(username, password, netid, crn_lst):
     except NoSuchElementException:
         print("no notification to be cleared")
 
-    # add courses marked by crn to list of desired classes
+    # adds courses marked by crn to list of desired classes
     print("adding courses...")
     crn_tab = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "enterCRNs-tab")))
     crn_tab.click()
@@ -124,14 +131,14 @@ def register_classes(username, password, netid, crn_lst):
     add_to_summary = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "addCRNbutton")))
     add_to_summary.click()
 
-    # submit courses
+    # submits courses
     print("submitting courses...")
-    # ##### currently commented out to avoid screwing with actually signing up for classes
-    # submit = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "saveButton")))
+    submit = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "saveButton")))
+    ####### currently commented out to avoid screwing with actually signing up for classes
     # submit.click()
     print("process completed. terminating in 30 seconds.")
 
-    # freeze for 30 seconds and terminate
+    # freezes for 30 seconds and terminates
     time.sleep(25)
     print("terminating in 5... ")
     time.sleep(1)

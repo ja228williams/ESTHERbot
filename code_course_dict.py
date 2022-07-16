@@ -1,3 +1,4 @@
+# file contains code_to_course dictionary, which maps 4-letter code to its corresponding department
 code_to_course = {'AAAS': 'African & African Amer Studies', 'AFSC': 'Air Force Science', 'ANTH': 'Anthropology',
                   'APPL': 'Applied Physics', 'ARAB': 'Arabic', 'ARCH': 'Architecture', 'HART': 'Art History',
                   'ASIA': 'Asian Studies', 'ASTR': 'Astronomy', 'BIOE': 'Bioengineering', 'BIOS': 'Biosciences',
