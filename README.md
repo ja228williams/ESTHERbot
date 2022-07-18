@@ -1,6 +1,15 @@
 # ESTHERbot
 ESTHERbot has three tasks- checking course availability, checking waitlist position, and course auto-registration for classes at Rice University. The first two of these may be set up to be automated for updates on a weekly (or daily, hourly, etc.) basis. For best use, ESTHERbot can be set up to send update emails for these at any desired frequency. Descriptions of and instructions for utilization of any of these tasks, as well as editing the necessary settings and setting up update emails, can be found below.
 
+## Download Requirements
+* **Python**: install newest version for corresponding system (Windows/Linux/Mac) at https://www.python.org/downloads/
+* **pip**: open your system's terminal / command prompt and type: 
+  - <ins>For Windows:</ins> py -m ensurepip --upgrade
+  - <ins>For Linux / MacOS:</ins> python -m ensurepip --upgrade
+* **Python packages**: open your system's terminal / command prompt and type: 
+  - pip install selenium
+  - pip install webdriver_manager
+
 ## Course Availability Updates
 check_availability.py 
 
@@ -23,5 +32,6 @@ NOTE: This task only currently functions for time periods during add/drop, and o
 ## Course Code Dictionary
 code_course_dict.py holds a dictionary mapping 4-letter codes to their corresponding departments (for example, 'COMP': 'Computer Science')  
 
-### _________________________________________________________________________________________________________________________
-For any other questions/suggestions/issues, email jaw15developer@gmail.com.
+<p>&nbsp;</p>
+
+For any other questions/suggestions/issues, or help setting up email jaw15developer@gmail.com.
