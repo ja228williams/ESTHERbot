@@ -9,14 +9,26 @@ ESTHERbot has three tasks- checking course availability, checking waitlist posit
 * **Python packages**: open your system's terminal / command prompt and type: 
   - pip install selenium
   - pip install webdriver_manager
+* (download all of these files?)
 
 ## Setting Environmental Variables
 <ins>For Windows:</ins> https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html
 
 <ins>For Mac/Linux:</ins> https://www.youtube.com/watch?v=5iWhQWVXosU&ab_channel=CoreySchafer
 
+The following environmental variables should be set:
+  - "esther_username": ESTHER username (student ID beginning with 'S')
+  - "esther_password": ESTHER password (should correspond to password at this website: https://esther.rice.edu/selfserve/twbkwbis.P_WWWLogin)
+  - "course_name": (for check_availability)- name of the course (ex. MUSI 117, COMP 140, etc.) that check_availability looks up
+  - "sender_email": the name of the Gmail account sending the update emails
+  - "email_password": the Gmail password for "sender_email"; described in the "Sending Emails" section
+  - "receiver_email": the name of the Gmail account receiving the update emails (can be the same as "sender_email")
+
 ## Automation
-To 
+Automating check_availability.py and/or check_waitlist.py requires scheduling the corresponding Python script to run at the desired times. The process is described for each of the following systems: 
+* Windows: 
+* Linux: https://www.geeksforgeeks.org/scheduling-python-scripts-on-linux/
+* macOS: https://python.plainenglish.io/auto-schedule-python-scripts-on-mac-37adac5db520
 
 ## Course Availability Updates
 check_availability.py 
