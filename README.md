@@ -19,10 +19,11 @@ ESTHERbot has three tasks- checking course availability, checking waitlist posit
 The following environmental variables should be set:
   - "esther_username": ESTHER username (student ID beginning with 'S')
   - "esther_password": ESTHER password (should correspond to password at this website: https://esther.rice.edu/selfserve/twbkwbis.P_WWWLogin)
-  - "course_name": (for check_availability)- name of the course (ex. MUSI 117, COMP 140, etc.) that check_availability looks up
+  - "course_name": (for check_availability) name of the course (ex. MUSI 117, COMP 140, etc.) that check_availability looks up
   - "sender_email": the name of the Gmail account sending the update emails
   - "email_password": the Gmail password for "sender_email"; described in the "Sending Emails" section
   - "receiver_email": the name of the Gmail account receiving the update emails (can be the same as "sender_email")
+  - "netid": (for register_classes) student netID
 
 ## Automation
 Automating check_availability.py and/or check_waitlist.py requires scheduling the corresponding Python script to run at the desired times. The process is described for each of the following systems: 
@@ -34,7 +35,7 @@ Automating check_availability.py and/or check_waitlist.py requires scheduling th
 Calling check_availability.py sends an email update about available sections of a course, and displays the message sent to the receiving email or the backtrace of an error if one occurs. To use the function once, type "Python (location of ESTHERbot)/check_availability.py" into command prompt / terminal. To automate, follow the instructions given in the "Automation" section.
 
 ## Waitlist Updates
-Calling check_waitlist.py sends an update email for waitlisted courses for the given account. The file checks ESTHER for information on waitlisted courses, including waitlist position, and displays a list of strings describing currently waitlisted courses.
+Calling check_waitlist.py sends an update email for waitlisted courses for the given account. The file checks ESTHER for information on waitlisted courses, including waitlist position, and displays a list of strings describing currently waitlisted courses. To use the function once, type "Python (location of ESTHERbot)/check_waitlist.py" into command prompt / terminal. To automate, follow the instructions given in the "Automation" section.
 
 ## Sending Emails
 send_email.py accesses the Gmail SMTP server, logs into the user's account and sends an email with a message and (optionally) a subject.
