@@ -31,12 +31,10 @@ Automating check_availability.py and/or check_waitlist.py requires scheduling th
 * macOS: https://python.plainenglish.io/auto-schedule-python-scripts-on-mac-37adac5db520
 
 ## Course Availability Updates
-check_availability.py 
-
-
+Calling check_availability.py sends an email update about available sections of a course, and displays the message sent to the receiving email or the backtrace of an error if one occurs. To use the function once, type "Python (location of ESTHERbot)/check_availability.py" into command prompt / terminal. To automate, follow the instructions given in the "Automation" section.
 
 ## Waitlist Updates
-check_waitlist.py 
+Calling check_waitlist.py sends an update email for waitlisted courses for the given account. The file checks ESTHER for information on waitlisted courses, including waitlist position, and displays a list of strings describing currently waitlisted courses.
 
 ## Sending Emails
 send_email.py accesses the Gmail SMTP server, logs into the user's account and sends an email with a message and (optionally) a subject.
