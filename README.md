@@ -9,7 +9,7 @@ ESTHERbot has three tasks- checking course availability, checking waitlist posit
 * **Python packages**: open your system's terminal / command prompt and type: 
   - pip install selenium
   - pip install webdriver_manager
-* (download all of these files?)
+* Download all of the Python (.py) files in this Github.
 
 ## Setting Environmental Variables
 <ins>For Windows:</ins> https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html
