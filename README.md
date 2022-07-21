@@ -45,7 +45,9 @@ To set this up, choose the Gmail account you want to use, and turn on 2-step ver
 ## Course Registration
 **NOTE**: This task only currently functions for time periods during add/drop, and outside of the hour-long period each semester where 15-minute time periods are allotted to each group (freshmen/sophomores/etc.), as this form of the website includes an extra screen that's inaccessible outside of this time period that requires the last 6 digits of the student's ID to be entered- but stay tuned for updates in future semesters. 
 
-Calling register_classes.py navigates to the student registration screen on ESTHER and signs up for classes corresponding to the CRNs given. **NOTE**: The submit button for the courses is currently disabled for safety reasons, so the user may either press the submit button on their own or alter the Python program to uncomment line 140 (# submit.click() -> submit.click()).
+Calling register_classes.py navigates to the student registration screen on ESTHER and signs up for classes corresponding to the CRNs given. 
+
+**NOTE**: The submit button for the courses is currently disabled for safety reasons, so the user may either press the submit button on their own or alter the Python program to uncomment line 140 (# submit.click() -> submit.click()).
 
 To call this function, navigate to your system's terminal / command prompt, and type "Python (location of ESTHERbot)\register_classes.py [CRN1,CRN2,...CRNk]" (for example, "Python .\Documents\ProgrammingProjects\ESTHERbot\register_classes.py [13532,14288]"). 
 
