@@ -32,7 +32,7 @@ Automating check_availability.py and/or check_waitlist.py requires scheduling th
 * <ins>For macOS</ins>: https://python.plainenglish.io/auto-schedule-python-scripts-on-mac-37adac5db520
 
 ## Course Availability Updates
-Calling check_availability.py sends an email update about available sections of a course, and displays the message sent to the receiving email or the backtrace of an error if one occurs. To use the function once, type "Python (location of ESTHERbot)\check_availability.py" into command prompt / terminal. To automate, follow the instructions given in the "Automation" section.
+Calling check_availability.py sends an email update about available sections of a course, and displays the message sent to the receiving email or the backtrace of an error if one occurs. To use the function once, type "Python (location of ESTHERbot)\check_availability.py" (for example, "Python .\Documents\ProgrammingProjects\ESTHERbot\check_waitlist.py") into command prompt / terminal. To automate, follow the instructions given in the "Automation" section.
 
 ## Waitlist Updates
 Calling check_waitlist.py sends an update email for waitlisted courses for the given account. The file checks ESTHER for information on waitlisted courses, including waitlist position, and displays a list of strings describing currently waitlisted courses. To use the function once, type "Python (location of ESTHERbot)/check_waitlist.py" (for example, "Python .\Documents\ProgrammingProjects\ESTHERbot\check_waitlist.py") into command prompt / terminal. To automate, follow the instructions given in the "Automation" section.
@@ -47,9 +47,9 @@ To set this up, choose the Gmail account you want to use, and turn on 2-step ver
 
 Calling register_classes.py navigates to the student registration screen on ESTHER and signs up for classes corresponding to the CRNs given. 
 
-**NOTE**: The submit button for the courses is currently disabled for safety reasons, so the user may either press the submit button on their own or alter the Python program to uncomment line 140 (# submit.click() -> submit.click()).
+**NOTE**: The submit button for the courses is currently disabled for safety reasons, so the user may either press the submit button on their own or alter the Python program to uncomment line 140 ("# submit.click()" -> "submit.click()").
 
-To call this function, navigate to your system's terminal / command prompt, and type "Python (location of ESTHERbot)\register_classes.py [CRN1,CRN2,...CRNk]" (for example, "Python .\Documents\ProgrammingProjects\ESTHERbot\register_classes.py [13532,14288]"). 
+To call this function, navigate to your system's terminal / command prompt, and type "Python (location of ESTHERbot)\register_classes.py [CRN1,CRN2,...CRNk]" (for example, "Python .\Documents\ProgrammingProjects\ESTHERbot\register_classes.py [13532,14288]" for CRNs 13532 and 14288). Make sure the text entered strictly follows this format, or the script may malfunction.
 
 ## Course Code Dictionary
 code_course_dict.py holds a dictionary mapping 4-letter codes to their corresponding departments (for example, 'COMP': 'Computer Science')  
