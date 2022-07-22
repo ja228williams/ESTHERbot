@@ -1,3 +1,5 @@
+import os
+import sys
 import time
 
 from selenium import webdriver
@@ -147,3 +149,12 @@ def register_classes(username, password, netid, crn_lst):
         time.sleep(1)
     print("terminating...")
     driver.quit()
+
+# esther info
+esther_username = os.environ.get("esther_username")
+esther_password = os.environ.get("esther_password")
+netid = os.environ.get("netid")
+
+if __name__ == "__main__":
+    courses = sys.argv[1].strip('[]').split(',')
+    register_classes(esther_username, esther_password, netid, courses)
