@@ -27,9 +27,9 @@ The following environmental variables should be set:
 
 ## Automation
 Automating check_availability.py and/or check_waitlist.py requires scheduling the corresponding Python script to run at the desired times. The process is described for each of the following systems: 
-* Windows: 
-* Linux: https://www.geeksforgeeks.org/scheduling-python-scripts-on-linux/
-* macOS: https://python.plainenglish.io/auto-schedule-python-scripts-on-mac-37adac5db520
+* <ins>For Windows</ins>: https://www.youtube.com/watch?v=IsuAltPOiEw&ab_channel=BIInsightsInc
+* <ins>For Linux</ins>: https://www.geeksforgeeks.org/scheduling-python-scripts-on-linux/
+* <ins>For macOS</ins>: https://python.plainenglish.io/auto-schedule-python-scripts-on-mac-37adac5db520
 
 ## Course Availability Updates
 Calling check_availability.py sends an email update about available sections of a course, and displays the message sent to the receiving email or the backtrace of an error if one occurs. To use the function once, type "Python (location of ESTHERbot)\check_availability.py" into command prompt / terminal. To automate, follow the instructions given in the "Automation" section.
