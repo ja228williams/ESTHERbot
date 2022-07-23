@@ -1,5 +1,6 @@
 import os
 import re
+import time
 import traceback
 
 from selenium import webdriver
@@ -69,7 +70,12 @@ def check_waitlist(username, password):
 
     :return: list of strings describing currently waitlisted courses
     """
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    try:
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    except PermissionError:
+        # attempts to avoid collision with other process
+        time.sleep(61)
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
     orig_url = "https://esther.rice.edu/selfserve/twbkwbis.P_WWWLogin"
     driver.get(orig_url)

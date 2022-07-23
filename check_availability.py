@@ -1,4 +1,5 @@
 import os
+import time
 import traceback
 
 from selenium import webdriver
@@ -55,7 +56,12 @@ def check_availability(username, password, course_name):
     :return: list of strings describing available course sections, including the course's name, type, professor, time,
              and number of remaining seats.
     """
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    try:
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    except PermissionError:
+        # attempts to avoid collision with other process
+        time.sleep(61)
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
     orig_url = "https://esther.rice.edu/selfserve/twbkwbis.P_WWWLogin"
     driver.get(orig_url)
